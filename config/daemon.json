@@ -1,0 +1,10 @@
+{
+    "ServerUrl": "http://web:5282/",
+    "ServerToken": "forthedream",
+    "RabbitMQUrl": "amqp://rabbitmq/",
+    "RedisUrl": "redis://redis:6379",
+    "TestData": "/opt/doj/data/testdata",
+    "Priority": 1,
+    "DataDisplayLimit": 100,
+    "TempDirectory": "/tmp"
+}

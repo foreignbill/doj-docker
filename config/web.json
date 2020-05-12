@@ -1,0 +1,125 @@
+{
+  "title": "Turing Judge",
+  "hostname": "0.0.0.0",
+  "port": "5282",
+  "db": {
+    "database": "doj",
+    "username": "root",
+    "password": "root",
+    "host": "mariadb"
+  },
+  "logo": {
+    "url": null,
+    "width": null,
+    "height": null
+  },
+  "register_mail": true,
+  "email": {
+    "method": "smtp",
+    "options": {
+      "AccessKeyId": "xxxx",
+      "AccessKeySecret": "xxxx",
+      "AccountName": "xxxx",
+      "host": "smtpdm.aliyun.com",
+      "username": "service@mail.turingjudge.com",
+      "password": "cXIUh694Bk",
+      "port": 465
+    }
+  },
+  "upload_dir": "uploads",
+  "default": {
+    "problem": {
+      "time_limit": 1000,
+      "memory_limit": 256
+    },
+    "user": {
+      "show": true,
+      "rating": 1500
+    },
+    "penalty": {
+      "time": 1200
+    }
+  },
+  "sorting": {
+    "ranklist": {
+      "field": "ac_num",
+      "order": "desc"
+    },
+    "problem": {
+      "field": "id",
+      "order": "asc"
+    }
+  },
+  "limit": {
+    "time_limit": 10000,
+    "memory_limit": 1024,
+    "data_size": 209715200,
+    "testdata": 209715200,
+    "submit_code": 102400,
+    "submit_answer": 10485760,
+    "custom_test_input": 20971520,
+    "testdata_filecount": 100
+  },
+  "page": {
+    "problem": 50,
+    "problem_statistics": 10,
+    "judge_state": 30,
+    "ranklist_index": 20,
+    "ranklist": 50,
+    "discussion": 10,
+    "article_comment": 10,
+    "contest": 20,
+    "edit_contest_problem_list": 10,
+    "edit_problem_tag_list": 10
+  },
+  "enabled_languages": [
+    "cpp",
+    "cpp11",
+    "cpp17",
+    "cpp-noilinux",
+    "cpp11-noilinux",
+    "cpp11-clang",
+    "cpp17-clang",
+    "c",
+    "c-noilinux",
+    "csharp",
+    "java",
+    "pascal",
+    "python2",
+    "python3",
+    "nodejs",
+    "ruby",
+    "haskell"
+  ],
+  "filter_enabled_languages": [
+    "cpp",
+    "cpp11",
+    "cpp17",
+    "cpp-noilinux",
+    "cpp11-noilinux",
+    "cpp11-clang",
+    "cpp17-clang",
+    "c",
+    "c-noilinux",
+    "csharp",
+    "java",
+    "pascal",
+    "python2",
+    "python3",
+    "nodejs",
+    "ruby",
+    "haskell"
+  ],
+  "session_secret": "forthedream",
+  "judge_token": "forthedream",
+  "redis": "redis://redis:6379",
+  "email_jwt_secret": "@EMAIL_JWT_SECRET@",
+  "google_analytics": "UA-XXXXXXXX-X",
+  "gravatar_url": "https://cdn.v2ex.com/gravatar",
+  "cdnjs_url": "https://cdnjs.loli.net/ajax/libs",
+  "self_cdn_url": "",
+  "google_fonts": {
+    "type": "like-google-fonts",
+    "url": "https://fonts.loli.net"
+  }
+}

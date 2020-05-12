@@ -1,0 +1,69 @@
+version: "2"
+
+services:
+    mariadb:
+        image: mariadb
+        restart: unless-stopped
+        networks:
+            - net
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_ROOT_PASSWORD=root
+        container_name: "mariadb"
+    web:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "web"
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./data:/opt/doj/web/uploads
+        working_dir: /opt/doj/web
+        networks:
+            - net
+        depends_on:
+            - mariadb
+            - redis
+            - judge-daemon
+        entrypoint: node app.js -c /opt/doj/config/web.json
+        ports:
+            - 5282:5282
+    redis:
+        image: redis
+        restart: unless-stopped
+        container_name: "redis"
+        networks:
+            - net
+        command: ["redis-server", "--appendonly", "yes"]
+    judge-daemon:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "judge-daemon"
+        working_dir: /opt/doj/judge/lib/daemon
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./sandbox:/opt/doj/sandbox
+        networks:
+            - net
+        command: ["node", "/opt/doj/judge/lib/daemon/index.js", "-c", "/opt/doj/config/daemon.json", "&&","node", "/opt/doj/judge/lib/runner/index.js", "-s", "/opt/doj/config/runner-shared.json", "-i", "/opt/doj/config/runner-instance.json"]
+    judge-runner:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "judge-runner"
+        working_dir: /opt/doj/judge/lib/runner
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./sandbox:/opt/doj/sandbox
+        networks:
+            - net
+        entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance.json
+    rabbitmq:
+        image: rabbitmq
+        restart: unless-stopped
+        container_name: "rabbitmq"
+        networks:
+            - net
+networks:
+    net:

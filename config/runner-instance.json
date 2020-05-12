@@ -1,0 +1,4 @@
+{
+    "WorkingDirectory": "/opt/doj/sandbox/tmp1",
+    "SandboxCgroup": "doj-1"
+}
