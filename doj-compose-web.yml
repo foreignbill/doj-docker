@@ -25,9 +25,12 @@ services:
             - mariadb
             - redis
             - judge-daemon
-        entrypoint: node app.js -c /opt/doj/config/web.json
         ports:
-            - 5282:5282
+            - 5283:5283
+        # environment:
+        #     - VIRTUAL_HOST=web,121.199.63.71
+        #     - VIRTUAL_PORT=5283
+        entrypoint: node app.js -c /opt/doj/config/web.json
     redis:
         image: redis
         restart: unless-stopped
@@ -46,7 +49,7 @@ services:
             - ./sandbox:/opt/doj/sandbox
         networks:
             - net
-        command: ["node", "/opt/doj/judge/lib/daemon/index.js", "-c", "/opt/doj/config/daemon.json", "&&","node", "/opt/doj/judge/lib/runner/index.js", "-s", "/opt/doj/config/runner-shared.json", "-i", "/opt/doj/config/runner-instance.json"]
+        command: node index.js -c /opt/doj/config/daemon.json
     judge-runner:
         image: doj:latest
         restart: unless-stopped
@@ -59,11 +62,23 @@ services:
         networks:
             - net
         entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance.json
+        privileged: true
     rabbitmq:
         image: rabbitmq
         restart: unless-stopped
         container_name: "rabbitmq"
         networks:
             - net
+    # proxy:
+    #     restart: unless-stopped
+    #     build:
+    #         context: "./nginx-proxy"
+    #     container_name: "nginx-proxy"
+    #     ports:
+    #         - "80:80"
+    #     networks:
+    #         - net
+    #     volumes:
+    #         - /var/run/docker.sock:/tmp/docker.sock:ro
 networks:
     net:
