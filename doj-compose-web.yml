@@ -29,7 +29,7 @@ services:
             - judge-daemon-1
             - judge-daemon-2
         ports:
-            - 80:8080
+            - 8080:8080
         entrypoint: node app.js -c /opt/doj/config/web.json
     redis:
         image: redis
