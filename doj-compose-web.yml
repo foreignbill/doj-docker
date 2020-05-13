@@ -37,7 +37,7 @@ services:
         networks:
             - net
         command: ["redis-server", "--appendonly", "yes"]
-    judge-daemon:
+    judge-daemon-1:
         image: doj:latest
         restart: unless-stopped
         container_name: "judge-daemon"
@@ -49,7 +49,7 @@ services:
         networks:
             - net
         command: node index.js -c /opt/doj/config/daemon.json
-    judge-runner:
+    judge-runner-1:
         image: doj:latest
         restart: unless-stopped
         container_name: "judge-runner"
@@ -60,7 +60,7 @@ services:
             - ./sandbox:/opt/doj/sandbox
         networks:
             - net
-        entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance.json
+        entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance-1.json
         privileged: true
     judge-daemon-2:
         image: doj:latest
