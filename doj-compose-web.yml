@@ -62,6 +62,31 @@ services:
             - net
         entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance.json
         privileged: true
+    judge-daemon-2:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "judge-daemon-1"
+        working_dir: /opt/doj/judge/lib/daemon
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./sandbox:/opt/doj/sandbox
+        networks:
+            - net
+        command: node index.js -c /opt/doj/config/daemon.json
+    judge-runner-2:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "judge-runner-1"
+        working_dir: /opt/doj/judge/lib/runner
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./sandbox:/opt/doj/sandbox
+        networks:
+            - net
+        entrypoint: node index.js -s /opt/doj/config/runner-shared.json -i /opt/doj/config/runner-instance-2.json
+        privileged: true
     rabbitmq:
         image: rabbitmq
         restart: unless-stopped
