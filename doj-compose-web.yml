@@ -9,6 +9,8 @@ services:
         environment:
             - ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - ./mysql:/var/lib/mysql
         container_name: "mariadb"
     web:
         image: doj:latest
@@ -27,9 +29,6 @@ services:
             - judge-daemon
         ports:
             - 5283:5283
-        # environment:
-        #     - VIRTUAL_HOST=web,121.199.63.71
-        #     - VIRTUAL_PORT=5283
         entrypoint: node app.js -c /opt/doj/config/web.json
     redis:
         image: redis
