@@ -40,7 +40,7 @@ services:
     judge-daemon-1:
         image: doj:latest
         restart: unless-stopped
-        container_name: "judge-daemon"
+        container_name: "judge-daemon-1"
         working_dir: /opt/doj/judge/lib/daemon
         volumes:
             - ./config:/opt/doj/config
@@ -52,7 +52,7 @@ services:
     judge-runner-1:
         image: doj:latest
         restart: unless-stopped
-        container_name: "judge-runner"
+        container_name: "judge-runner-1"
         working_dir: /opt/doj/judge/lib/runner
         volumes:
             - ./config:/opt/doj/config
@@ -65,7 +65,7 @@ services:
     judge-daemon-2:
         image: doj:latest
         restart: unless-stopped
-        container_name: "judge-daemon-1"
+        container_name: "judge-daemon-2"
         working_dir: /opt/doj/judge/lib/daemon
         volumes:
             - ./config:/opt/doj/config
@@ -77,7 +77,7 @@ services:
     judge-runner-2:
         image: doj:latest
         restart: unless-stopped
-        container_name: "judge-runner-1"
+        container_name: "judge-runner-2"
         working_dir: /opt/doj/judge/lib/runner
         volumes:
             - ./config:/opt/doj/config
