@@ -3,3 +3,4 @@ data/
 sandbox-rootfs*.tar.gz
 judge/
 DOJ/
+config/
