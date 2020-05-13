@@ -26,7 +26,8 @@ services:
         depends_on:
             - mariadb
             - redis
-            - judge-daemon
+            - judge-daemon-1
+            - judge-daemon-2
         ports:
             - 80:8080
         entrypoint: node app.js -c /opt/doj/config/web.json
