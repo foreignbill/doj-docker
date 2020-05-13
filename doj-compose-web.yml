@@ -28,7 +28,7 @@ services:
             - redis
             - judge-daemon
         ports:
-            - 5283:5283
+            - 80:8080
         entrypoint: node app.js -c /opt/doj/config/web.json
     redis:
         image: redis
