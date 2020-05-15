@@ -39,6 +39,6 @@ ADD DOJ /opt/doj/web
 RUN cd /opt/doj/web \
 	&& yarn
 
-RUN timedatectl set-timezone Asia/Shanghai
+RUN echo 'Asia/Shanghai' >/etc/timezone
 
 CMD ["/bin/bash"]
