@@ -18,6 +18,8 @@ RUN apt-get update \
 	&& apt install clang-format -y \
 	&& apt install graphicsmagick -y
 
+RUN apt install git -y
+
 RUN apt install build-essential libboost-all-dev -y
 
 RUN apt install rabbitmq-server -y
