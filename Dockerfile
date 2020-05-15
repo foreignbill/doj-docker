@@ -39,4 +39,6 @@ ADD DOJ /opt/doj/web
 RUN cd /opt/doj/web \
 	&& yarn
 
+RUN echo 'Asia/Shanghai' >/etc/timezone
+
 CMD ["/bin/bash"]
