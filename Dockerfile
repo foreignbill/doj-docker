@@ -32,13 +32,13 @@ RUN cd /opt/doj/judge \
 RUN cd /opt/doj/judge \
 	&& yarn run build
 
-ADD sandbox /opt/doj/sandbox
+# ADD sandbox /opt/doj/sandbox
 
 ADD DOJ /opt/doj/web
 
 RUN cd /opt/doj/web \
 	&& yarn
 
-RUN echo 'Asia/Shanghai' >/etc/timezone
+RUN timedatectl set-timezone Asia/Shanghai
 
 CMD ["/bin/bash"]
