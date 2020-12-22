@@ -112,27 +112,48 @@ upstream {{ $upstream_name }} {
 {{ end }}
 }
 
+upstream turingjudge_nginx {
+                ip_hash;
+                server 47.111.0.116:8080;
+                server 47.111.0.116:8081;
+                server 47.111.0.116:8082;
+                server 47.111.0.116:8083;
+}
+
+
 server {
-	listen 80;
-	listen [::]:80;
+	listen 443;
+	listen [::]:443;
 	access_log /var/log/nginx/access.log vhost;
 
-	client_max_body_size 200m;
+	client_max_body_size 10240m;
 
 	{{ if (exists (printf "/etc/nginx/vhost.d/%s" $host)) }}
 	include {{ printf "/etc/nginx/vhost.d/%s" $host }};
 	{{ end }}
 
+	server_name _;
+	ssl on;
+	ssl_certificate /app/4057724_www.turingjudge.com.pem;
+	ssl_certificate_key /app/4057724_www.turingjudge.com.key;
+	ssl_verify_client off;
+	ssl_session_timeout 5m;
+        proxy_ssl_session_reuse off;
+
 	location / {
-        proxy_http_version 1.1;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Host web;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_pass http://web:5283/;
-    }
+		proxy_http_version 1.1;
+		#proxy_ssl_session_reuse off;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Host $host$1;
+		#proxy_set_header Connection $connection_upgrade;
+		proxy_pass http://turingjudge_nginx;
+	}
+
+	error_log /app/doj.log error;
+
 }
 
 {{ end }}

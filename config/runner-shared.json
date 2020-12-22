@@ -8,7 +8,7 @@
     "StderrDisplayLimit": 5120,
     "DataDisplayLimit": 128,
     "CompilerMessageLimit": 50000,
-    "SpjTimeLimit": 1501,
+    "SpjTimeLimit": 3001,
     "SpjMemoryLimit": 256,
     "SandboxEnvironments": [
         "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",

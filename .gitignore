@@ -4,3 +4,6 @@ sandbox-rootfs*.tar.gz
 judge/
 DOJ/
 config/
+*.pem
+*.key
+mysql/*

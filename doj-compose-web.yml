@@ -31,6 +31,63 @@ services:
         ports:
             - 8080:8080
         entrypoint: node app.js -c /opt/doj/config/web.json
+    web-2:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "web-2"
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./data:/opt/doj/web/uploads
+        working_dir: /opt/doj/web
+        networks:
+            - net
+        depends_on:
+            - mariadb
+            - redis
+            - judge-daemon-1
+            - judge-daemon-2
+        ports:
+            - 8081:8080
+        entrypoint: node app.js -c /opt/doj/config/web.json
+    web-3:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "web-3"
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./data:/opt/doj/web/uploads
+        working_dir: /opt/doj/web
+        networks:
+            - net
+        depends_on:
+            - mariadb
+            - redis
+            - judge-daemon-1
+            - judge-daemon-2
+        ports:
+            - 8082:8080
+        entrypoint: node app.js -c /opt/doj/config/web.json
+    web-4:
+        image: doj:latest
+        restart: unless-stopped
+        container_name: "web-4"
+        volumes:
+            - ./config:/opt/doj/config
+            - ./data:/opt/doj/data
+            - ./data:/opt/doj/web/uploads
+        working_dir: /opt/doj/web
+        networks:
+            - net
+        depends_on:
+            - mariadb
+            - redis
+            - judge-daemon-1
+            - judge-daemon-2
+        ports:
+            - 8083:8080
+        entrypoint: node app.js -c /opt/doj/config/web.json
     redis:
         image: redis
         restart: unless-stopped
@@ -94,16 +151,20 @@ services:
         container_name: "rabbitmq"
         networks:
             - net
-    # proxy:
-    #     restart: unless-stopped
-    #     build:
-    #         context: "./nginx-proxy"
-    #     container_name: "nginx-proxy"
-    #     ports:
-    #         - "80:80"
-    #     networks:
-    #         - net
-    #     volumes:
-    #         - /var/run/docker.sock:/tmp/docker.sock:ro
+    proxy:
+        restart: unless-stopped
+        #image: jwilder/nginx-proxy
+        build:
+            context: "./nginx-proxy"
+        container_name: "nginx-proxy"
+        ports:
+            - "443:443"
+        networks:
+            - net
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        environment:
+            - VIRTUAL_HOST=www.turingjudge.com
+            - USE_IP_HASH=true
 networks:
     net:

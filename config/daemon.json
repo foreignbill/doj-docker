@@ -1,5 +1,5 @@
 {
-    "ServerUrl": "http://web:5282/",
+    "ServerUrl": "http://web:8080/",
     "ServerToken": "forthedream",
     "RabbitMQUrl": "amqp://rabbitmq/",
     "RedisUrl": "redis://redis:6379",

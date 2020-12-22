@@ -1,11 +1,11 @@
 {
   "title": "Turing Judge",
   "hostname": "0.0.0.0",
-  "port": "5282",
+  "port": "8080",
   "db": {
     "database": "doj",
-    "username": "root",
-    "password": "root",
+    "username": "doj",
+    "password": "12hNn5UZM0ZjDn74",
     "host": "mariadb"
   },
   "logo": {
@@ -47,7 +47,7 @@
     },
     "problem": {
       "field": "id",
-      "order": "asc"
+      "order": "desc"
     }
   },
   "limit": {
@@ -65,10 +65,10 @@
     "problem_statistics": 10,
     "judge_state": 30,
     "ranklist_index": 20,
-    "ranklist": 50,
+    "ranklist": 100,
     "discussion": 10,
     "article_comment": 10,
-    "contest": 20,
+    "contest": 30,
     "edit_contest_problem_list": 10,
     "edit_problem_tag_list": 10
   },
