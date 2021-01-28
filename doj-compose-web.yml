@@ -159,6 +159,7 @@ services:
         container_name: "nginx-proxy"
         ports:
             - "443:443"
+            - "80:80"
         networks:
             - net
         volumes:

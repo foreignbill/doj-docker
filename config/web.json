@@ -70,7 +70,8 @@
     "article_comment": 10,
     "contest": 30,
     "edit_contest_problem_list": 10,
-    "edit_problem_tag_list": 10
+    "edit_problem_tag_list": 10,
+    "invitation": 200
   },
   "enabled_languages": [
     "cpp",
